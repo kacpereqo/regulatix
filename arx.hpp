@@ -17,19 +17,19 @@ private:
     std::vector<f32> a;
     std::vector<f32> b;
 
-    size a_size;
-    size b_size;
+    size a_size{};
+    size b_size{};
 
     std::vector<f32> u;
     std::vector<f32> y;
 
-    f32 delay; // tick delay, also known as k
-    f32 noise_coefficient; // noise coefficient, also known as z
+    f32 delay{}; // tick delay, also known as k
+    f32 noise_coefficient{}; // noise coefficient, also known as z
 
     float noise() const override;
 
 public:
-    ModelARX( const std::vector<f32>& a, const std::vector<f32>& b,  f32 delay , f32 noise_coefficient );
+    ModelARX( const std::vector<f32>& a, const std::vector<f32>& b, f32 delay = 1, f32 noise_coefficient = 0);
     float run(float input_signal) override;
 
     void set_delay(f32 delay);

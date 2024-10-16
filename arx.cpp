@@ -6,7 +6,7 @@
 #include "utils/rng.hpp"
 #include "utils/errors.hpp"
 
-inline ModelARX::ModelARX( const std::vector<float>& a, const std::vector<float>& b, const float delay = 1, const float noise_coefficient = 0 ) {
+ModelARX::ModelARX( const std::vector<f32>& a, const std::vector<f32>& b, const f32 delay, const f32 noise_coefficient) {
     this->set_a(a);
     this->set_b(b);
 

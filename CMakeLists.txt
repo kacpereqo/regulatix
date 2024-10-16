@@ -14,4 +14,5 @@ add_executable(Regulatix main.cpp
         signal_generators/signal_generator.hpp
         signal_generators/sinus.hpp
         signal_generators/square.hpp
-        signal_generators/single_jump.hpp)
+        signal_generators/single_jump.hpp
+        feedback_loop.hpp)
