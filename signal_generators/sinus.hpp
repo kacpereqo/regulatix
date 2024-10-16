@@ -14,7 +14,7 @@ private:
     u32 period;
 
 public:
-    SinusSignalGenerator(const f32 amplitude,const u32 period) {
+    SinusSignalGenerator(const f32 amplitude,const size period) {
         this->amplitude = amplitude;
         this->period = period;
     }
