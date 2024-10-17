@@ -51,13 +51,13 @@ build cmake_object_order_depends_target_Regulatix: phony || .
 
 build CMakeFiles/Regulatix.dir/main.cpp.obj: CXX_COMPILER__Regulatix_unscanned_Debug C$:/Users/remza/CLionProjects/Regulatix/main.cpp || cmake_object_order_depends_target_Regulatix
   DEP_FILE = CMakeFiles\Regulatix.dir\main.cpp.obj.d
-  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  FLAGS = -O0 -g -std=gnu++23 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Regulatix.dir
   OBJECT_FILE_DIR = CMakeFiles\Regulatix.dir
 
 build CMakeFiles/Regulatix.dir/arx.cpp.obj: CXX_COMPILER__Regulatix_unscanned_Debug C$:/Users/remza/CLionProjects/Regulatix/arx.cpp || cmake_object_order_depends_target_Regulatix
   DEP_FILE = CMakeFiles\Regulatix.dir\arx.cpp.obj.d
-  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  FLAGS = -O0 -g -std=gnu++23 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Regulatix.dir
   OBJECT_FILE_DIR = CMakeFiles\Regulatix.dir
 
@@ -70,7 +70,7 @@ build CMakeFiles/Regulatix.dir/arx.cpp.obj: CXX_COMPILER__Regulatix_unscanned_De
 # Link the executable Regulatix.exe
 
 build Regulatix.exe: CXX_EXECUTABLE_LINKER__Regulatix_Debug CMakeFiles/Regulatix.dir/main.cpp.obj CMakeFiles/Regulatix.dir/arx.cpp.obj
-  FLAGS = -g
+  FLAGS = -O0 -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Regulatix.dir
   POST_BUILD = cd .

@@ -15,7 +15,9 @@ private:
     std::fstream file;
 
 public:
-    FileManager() = default;
+    FileManager() {
+        this->file.open(this->filename, std::ios::out | std::ios::binary);
+    }
 
     template <typename T>
     T& open() {

@@ -34,8 +34,11 @@ float ModelARX::run(const f32 input_signal) {
 
     result += this->noise();
 
-    this->u[this->tick % this->a_size] = input_signal;
-    this->y[this->tick % this->b_size] = result;
+    const index u_index = this->tick % this->a_size;
+    const index y_index = this->tick % this->b_size;
+
+    this->u[u_index] = input_signal;
+    this->y[y_index] = result;
 
     this->tick++;
 

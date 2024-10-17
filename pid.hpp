@@ -18,9 +18,17 @@ private:
 
     size tick;
 
-    std::vector<f32> values;
+    f32 proportional;
+    f32 integral;
+    f32 derivative;
+
+    void calculate_proportional(f32 input_signal);
+    void calculate_integral(f32 input_signal);
+    void calculate_derivative(f32 input_signal);
 
 public:
+    std::vector<f32> values;
+
     PidModel(f32 k, f32 t, f32 td);
     float run(f32 input_signal);
 
@@ -28,6 +36,8 @@ public:
         this->tick = 0;
         this->values.clear();
     }
+
+
 
 
 };
@@ -38,33 +48,40 @@ inline PidModel::PidModel(const f32 k, const f32 t = 0, const f32 td =0 ) {
     this->td = td;
     this->tick = 0;
 
-    this->values = std::vector<f32>(64, 0.0f);
+    this->values = std::vector<f32>();
 }
 
-inline float PidModel::run(const f32 input_signal) {
-    f32 result = 0;
-    this->values.push_back(input_signal);
+inline void PidModel::calculate_proportional(const f32 input_signal) {
+    this->proportional = this->k * input_signal;
+}
 
-    // Proportional
-    if (this->k != 0) {
-        result += this->k * input_signal;
-    }
-
-    // Integral
+inline void PidModel::calculate_integral(const f32 input_signal) {
     if (this->t != 0) {
         f32 sum = std::accumulate(this->values.begin(), this->values.end(), 0.0f);
-        sum = sum/this->t;
-
-        result += sum;
+        sum  = sum/this->t;
     }
+}
 
-    // Derivative
+inline void PidModel::calculate_derivative(const f32 input_signal) {
     if(this->td != 0 && this->tick > 0) {
         f32 diff = this->values[this->tick] - this->values[this->tick - 1];
         diff = this->td * diff;
 
-        result += diff;
+        this->derivative = diff;
     }
+}
+
+inline float PidModel::run(const f32 input_signal) {
+    this->values.push_back(input_signal);
+
+    calculate_proportional(input_signal);
+    calculate_integral(input_signal);
+    calculate_derivative(input_signal);
+
+    f32 result = 0;
+    result += this->proportional;
+    result += this->integral;
+    result += this->derivative;
 
     this->tick++;
 
