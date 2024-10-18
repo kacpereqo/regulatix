@@ -26,8 +26,8 @@ private:
     void calculate_integral(f32 input_signal);
     void calculate_derivative(f32 input_signal);
 
-public:
     std::vector<f32> values;
+public:
 
     PidModel(f32 k, f32 t, f32 td);
     float run(f32 input_signal);
@@ -36,10 +36,6 @@ public:
         this->tick = 0;
         this->values.clear();
     }
-
-
-
-
 };
 
 inline PidModel::PidModel(const f32 k, const f32 t = 0, const f32 td =0 ) {
@@ -49,6 +45,7 @@ inline PidModel::PidModel(const f32 k, const f32 t = 0, const f32 td =0 ) {
     this->tick = 0;
 
     this->values = std::vector<f32>();
+    this->values.reserve(64);
 }
 
 inline void PidModel::calculate_proportional(const f32 input_signal) {
@@ -57,7 +54,10 @@ inline void PidModel::calculate_proportional(const f32 input_signal) {
 
 inline void PidModel::calculate_integral(const f32 input_signal) {
     if (this->t != 0) {
-        f32 sum = std::accumulate(this->values.begin(), this->values.end(), 0.0f);
+        f32 sum = 0.0f;
+        for (const auto value : this->values) {
+            this->integral += value;
+        }
         sum  = sum/this->t;
     }
 }

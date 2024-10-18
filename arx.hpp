@@ -10,7 +10,7 @@
 #include "model.hpp"
 
 
-class ModelARX final : public Model {
+class ModelARX : public Model {
 private:
     u64 tick;
 

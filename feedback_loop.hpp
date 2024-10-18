@@ -11,25 +11,20 @@
 
 #include "utils/units.hpp"
 
-class FeedbackLoop {
+class FeedbackLoop final : public PidModel, public ModelARX {
 private:
-    PidModel pid;
-    ModelARX arx;
-
     size tick;
 
 public:
-    FeedbackLoop(const PidModel  & pid, const ModelARX & arx): pid(pid), arx(arx) {
-        this->pid = pid;
-        this->arx = arx;
+    FeedbackLoop(const PidModel& pid, const ModelARX& arx): PidModel(pid), ModelARX(arx) {
         this->tick = 0;
     }
 
     f32 run(const f32 target_value, const f32 input_signal = 0) {
         const f32 error = target_value - input_signal;
 
-        const f32 pid_result = this->pid.run(error);
-        const f32 arx_result = this->arx.run(pid_result);
+        const f32 pid_result = this->PidModel::run(error);
+        const f32 arx_result = this->ModelARX::run(pid_result);
 
         this->tick++;
 
