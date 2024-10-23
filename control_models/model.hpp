@@ -11,7 +11,6 @@ public:
 
 private:
     virtual float run(float input_signal) = 0;
-    virtual float noise() const = 0;
 };
 
 #endif //MODEL_HPP

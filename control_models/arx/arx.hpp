@@ -6,8 +6,8 @@
 #define ARX_HPP
 
 #include <vector>
-#include "utils/units.hpp"
-#include "model.hpp"
+#include "../../utils/units.hpp"
+#include "../model.hpp"
 
 
 class ModelARX : public Model {
@@ -25,10 +25,9 @@ private:
 
     f32 delay{}; // tick delay, also known as k
     f32 noise_coefficient{}; // noise coefficient, also known as z
-
-    float noise() const override;
-
 public:
+    f32 noise() const;
+
     ModelARX( const std::vector<f32>& a, const std::vector<f32>& b, f32 delay = 1, f32 noise_coefficient = 0);
     float run(float input_signal) override;
 

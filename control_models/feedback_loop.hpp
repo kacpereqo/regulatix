@@ -6,10 +6,10 @@
 #define FEEDBACK_LOOP_HPP
 
 
-#include "pid.hpp"
-#include "arx.hpp"
+#include "pid/pid.hpp"
+#include "arx/arx.hpp"
 
-#include "utils/units.hpp"
+#include "../utils/units.hpp"
 
 class FeedbackLoop final : public PidModel, public ModelARX {
 private:

@@ -7,19 +7,20 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 add_executable(Regulatix main.cpp
         utils/units.hpp
-        arx.cpp
-        arx.hpp
+        control_models/arx/arx.cpp
+        control_models/arx/arx.hpp
         "utils/rng.hpp"
-        model.hpp
+        control_models/model.hpp
         utils/errors.hpp
-        pid.hpp
+        control_models/pid/pid.hpp
         signal_generators/signal_generator.hpp
         signal_generators/sinus.hpp
         signal_generators/square.hpp
         signal_generators/single_jump.hpp
-        feedback_loop.hpp
-        file_manager.hpp
-        csv.hpp
-        file_factory.hpp
-        abstract_file_factory.hpp)
+        control_models/feedback_loop.hpp
+        Filesystem/file_manager.hpp
+        filesystem/csv.hpp
+        Filesystem/file_factory.hpp
+        filesystem/abstract_file_factory.hpp
+        utils/global_storage.hpp)
 

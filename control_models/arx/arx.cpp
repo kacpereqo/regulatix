@@ -3,8 +3,8 @@
 //
 
 #include "arx.hpp"
-#include "utils/rng.hpp"
-#include "utils/errors.hpp"
+#include "../../utils/rng.hpp"
+#include "../../utils/errors.hpp"
 
 ModelARX::ModelARX( const std::vector<f32>& a, const std::vector<f32>& b, const f32 delay, const f32 noise_coefficient) {
     this->set_a(a);

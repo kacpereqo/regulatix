@@ -1,9 +1,9 @@
 #include <iostream>
-#include "feedback_loop.hpp"
-#include "pid.hpp"
-#include "arx.hpp"
+#include "control_models/feedback_loop.hpp"
+#include "control_models/pid/pid.hpp"
+#include "control_models/arx/arx.hpp"
 #include "signal_generators/sinus.hpp"
-#include "csv.hpp"
+#include "filesystem/csv.hpp"
 
 int main()
     {
