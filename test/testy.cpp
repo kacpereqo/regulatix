@@ -7,7 +7,7 @@
 
 bool nearly_equal(float a, float b, float tolerance = 1e-5) 
 {
-    return std::fabs(a - b) < tolerance;
+    return std::abs(a - b) < tolerance;
 }
 
 
@@ -43,6 +43,23 @@ void test_rectangle_signal_generator()
     else 
     {
         std::cerr << "RectangleSignalGenerator: Failed\n";
+    }
+}
+
+void test_single_jump_generator() 
+{
+    SingleJumpGenerator generator(1.0f, 10);
+
+    if (generator.generate(0) == 1.0f &&
+        generator.generate(10) == 1.0f &&
+        generator.generate(11) == 0.0f &&
+        generator.generate(20) == 0.0f) 
+    {
+        std::cerr << "SingleJumpGenerator: Passed\n";
+    } 
+    else 
+    {
+        std::cerr << "SingleJumpGenerator: Failed\n";
     }
 }
 
