@@ -68,6 +68,7 @@ int main()
 {
     test_sinus_signal_generator();
     test_rectangle_signal_generator();
+    test_single_jump_generator();
 
     return 0;
 }
