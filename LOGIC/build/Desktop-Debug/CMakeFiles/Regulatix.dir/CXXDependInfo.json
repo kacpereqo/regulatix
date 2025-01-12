@@ -1,0 +1,18 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "MSVC",
+	"compiler-id" : "MSVC",
+	"compiler-simulate-id" : "",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "C:/Users/MSI/Documents/GitHub/regulatix/LOGIC/build/Desktop-Debug",
+	"dir-cur-src" : "C:/Users/MSI/Documents/GitHub/regulatix/LOGIC",
+	"dir-top-bld" : "C:/Users/MSI/Documents/GitHub/regulatix/LOGIC/build/Desktop-Debug",
+	"dir-top-src" : "C:/Users/MSI/Documents/GitHub/regulatix/LOGIC",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : [],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "C:/Users/MSI/Documents/GitHub/regulatix/LOGIC/build/Desktop-Debug/CMakeFiles/Regulatix.dir"
+}

@@ -1,0 +1,5 @@
+ninja_dyndep_version = 1.0
+build CMakeFiles\Regulatix.dir\main.cpp.obj: dyndep
+
+build CMakeFiles\Regulatix.dir\control_models\arx\arx.cpp.obj: dyndep
+

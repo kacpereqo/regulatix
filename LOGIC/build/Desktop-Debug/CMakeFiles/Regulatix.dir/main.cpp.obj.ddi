@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "CMakeFiles\\Regulatix.dir\\main.cpp.obj",
+            "outputs": [
+                "C:\\Users\\MSI\\Documents\\GitHub\\regulatix\\LOGIC\\build\\Desktop-Debug\\vc140.pdb",
+                "CMakeFiles\\Regulatix.dir\\main.cpp.obj.ddi"
+            ],
+            "requires": []
+        }
+    ]
+}

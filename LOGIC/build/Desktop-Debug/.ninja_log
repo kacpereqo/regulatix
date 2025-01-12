@@ -1,0 +1,7 @@
+# ninja log v6
+10	166	7583862753452054	CMakeFiles/Regulatix.dir/main.cpp.obj.ddi	6c4e4ca71069b537
+26	169	7583862753601659	CMakeFiles/Regulatix.dir/control_models/arx/arx.cpp.obj.ddi	a42dd49c25b74f8e
+169	223	7583862755531845	CMakeFiles/Regulatix.dir/CXX.dd	c044ee562c8075d9
+169	223	7583862755531845	C:/Users/MSI/Documents/GitHub/regulatix/LOGIC/build/Desktop-Debug/CMakeFiles/Regulatix.dir/CXXModules.json	c044ee562c8075d9
+169	223	7583862755531845	CMakeFiles/Regulatix.dir/main.cpp.obj.modmap	c044ee562c8075d9
+169	223	7583862755531845	CMakeFiles/Regulatix.dir/control_models/arx/arx.cpp.obj.modmap	c044ee562c8075d9

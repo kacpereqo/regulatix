@@ -1,0 +1,3 @@
+C:/Users/MSI/Documents/GitHub/regulatix/LOGIC/build/Desktop-Debug/CMakeFiles/Regulatix.dir
+C:/Users/MSI/Documents/GitHub/regulatix/LOGIC/build/Desktop-Debug/CMakeFiles/edit_cache.dir
+C:/Users/MSI/Documents/GitHub/regulatix/LOGIC/build/Desktop-Debug/CMakeFiles/rebuild_cache.dir
