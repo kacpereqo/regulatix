@@ -1,0 +1,27 @@
+{
+	"BUILD_DIR" : "C:/Users/MSI/Documents/GitHub/regulatix/GUI/build/Desktop-Debug/GUI_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/MSI/Documents/GitHub/regulatix/GUI/build/Desktop-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/MSI/Documents/GitHub/regulatix/GUI/build/Desktop-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/MSI/Documents/GitHub/regulatix/GUI",
+	"CMAKE_SOURCE_DIR" : "C:/Users/MSI/Documents/GitHub/regulatix/GUI",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "C:/Users/MSI/Documents/GitHub/regulatix/GUI/build/Desktop-Debug/GUI_autogen/include",
+	"INPUTS" : 
+	[
+		"C:/Users/MSI/Documents/GitHub/regulatix/GUI/red.png",
+		"C:/Users/MSI/Documents/GitHub/regulatix/GUI/green.png",
+		"C:/Users/MSI/Documents/GitHub/regulatix/GUI/PID.png"
+	],
+	"LOCK_FILE" : "C:/Users/MSI/Documents/GitHub/regulatix/GUI/build/Desktop-Debug/CMakeFiles/GUI_autogen.dir/AutoRcc_resources_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "--no-zstd", "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "C:/Qt/6.8.1/msvc2022_64/bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "C:/Users/MSI/Documents/GitHub/regulatix/GUI/build/Desktop-Debug/CMakeFiles/GUI_autogen.dir/AutoRcc_resources_EWIEGA46WW_Used.txt",
+	"SOURCE" : "C:/Users/MSI/Documents/GitHub/regulatix/GUI/resources.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

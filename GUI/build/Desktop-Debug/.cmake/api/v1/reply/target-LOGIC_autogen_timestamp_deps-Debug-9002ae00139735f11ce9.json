@@ -1,0 +1,27 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"C:/Users/MSI/Documents/GitHub/regulatix/LOGIC/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"id" : "LOGIC_autogen_timestamp_deps::@9dc992399c60d0058af0",
+	"isGeneratorProvided" : true,
+	"name" : "LOGIC_autogen_timestamp_deps",
+	"paths" : 
+	{
+		"build" : "LOGIC",
+		"source" : "C:/Users/MSI/Documents/GitHub/regulatix/LOGIC"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

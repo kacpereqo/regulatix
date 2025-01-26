@@ -36,6 +36,30 @@ public:
         this->tick = 0;
         this->values.clear();
     }
+    f32 get_k() const
+    {
+        return k;
+    }
+    f32 get_t() const
+    {
+        return t;
+    }
+    f32 get_td() const
+    {
+        return td;
+    }
+    void set_k(f32 k)
+    {
+        this->k = k;
+    }
+    void set_t(f32 t)
+    {
+        this->t = t;
+    }
+    void set_td(f32 td)
+    {
+        this->td = td;
+    }
 };
 
 inline PidModel::PidModel(const f32 k, const f32 t = 0, const f32 td =0 ) {
