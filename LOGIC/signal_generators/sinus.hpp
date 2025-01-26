@@ -5,9 +5,7 @@
 #ifndef SINUS_HPP
 #define SINUS_HPP
 #define _USE_MATH_DEFINES
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
+
 #include "signal_generator.hpp"
 #include <cmath>
 

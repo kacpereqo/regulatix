@@ -11,7 +11,7 @@ Generator::Generator(Parameters *parameters, QWidget *parent)
     connect(ui->buttonBox,&QDialogButtonBox::accepted,this, &Generator::ok);
 
     ui->textEdit0->setText(QString::number(parameters->zero));
-    ui->textEdit1->setText(QString::number(parameters->first));
+    ui->textEdit2->setText(QString::number(parameters->first));
     ui->textEdit2->setText(QString::number(parameters->second));
 
     switch(parameters->type)
@@ -43,35 +43,23 @@ Generator::~Generator()
 void Generator::ok()
 {
     bool error;
-    int z = ui->textEdit0->toPlainText().toFloat();
-    int f = ui->textEdit1->toPlainText().toUInt();
-    int s = ui->textEdit2->toPlainText().toFloat();
     bool zeroValid = ui->textEdit0->toPlainText().toFloat(&error);
     bool firstValid = ui->textEdit1->toPlainText().toUInt(&error);
     bool secondValid = ui->textEdit2->toPlainText().toFloat(&error);
-    if(z == 0)
-    {
-        zeroValid = true;
-    }
-    else if(f == 0)
-    {
-        firstValid = true;
-    }
     else if(s == 0)
     {
-        secondValid = true;
-    }
+
+
     if (!zeroValid || !firstValid || !secondValid)
     {
-
         QMessageBox::critical(this, "Błąd krytyczny", "Podane wartości muszą być liczbami.");
         return;
     }
     else
     {
+
         parameters->zero = ui->textEdit0->toPlainText().toFloat();
         parameters->first = ui->textEdit1->toPlainText().toUInt();
         parameters->second = ui->textEdit2->toPlainText().toFloat();
     }
-
 }

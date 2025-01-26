@@ -111,9 +111,14 @@ void MainWindow::tick()
 void MainWindow::changeRegulatorParameters()
 {
     bool error;
+    int k =ui->kTextEdit->toPlainText().toFloat();
+    int t = ui->tTextEdit->toPlainText().toFloat();
+    int td = ui->tdTextEdit->toPlainText().toFloat();
+
     bool kValid = ui->kTextEdit->toPlainText().toFloat(&error);
     bool tValid = ui->tTextEdit->toPlainText().toFloat(&error);
     bool tdValid = ui->tdTextEdit->toPlainText().toFloat(&error);
+
 
     if (!kValid || !tValid || !tdValid)
     {
@@ -123,8 +128,8 @@ void MainWindow::changeRegulatorParameters()
     else
     {
         feedback->set_k(ui->kTextEdit->toPlainText().toFloat());
-        feedback->set_t(ui->kTextEdit->toPlainText().toFloat());
-        feedback->set_td(ui->kTextEdit->toPlainText().toFloat());
+        feedback->set_t(ui->tTextEdit->toPlainText().toFloat());
+        feedback->set_td(ui->tdTextEdit->toPlainText().toFloat());
     }
 
 }
