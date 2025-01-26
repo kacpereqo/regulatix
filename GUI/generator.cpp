@@ -42,10 +42,11 @@ Generator::~Generator()
 }
 void Generator::ok()
 {
-    bool error;
-    bool zeroValid = ui->textEdit0->toPlainText().toFloat(&error);
-    bool firstValid = ui->textEdit1->toPlainText().toUInt(&error);
-    bool secondValid = ui->textEdit2->toPlainText().toFloat(&error);
+    bool zeroValid, firstValid, secondValid;
+
+    float zero = ui->textEdit0->toPlainText().toFloat(&zeroValid);
+    float first = ui->textEdit1->toPlainText().toUInt(&firstValid);
+    float second = ui->textEdit2->toPlainText().toFloat(&secondValid);
 
 
     if (!zeroValid || !firstValid || !secondValid)
