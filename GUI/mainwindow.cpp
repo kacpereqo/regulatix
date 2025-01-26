@@ -17,13 +17,12 @@
 #include <QtCharts/QValueAxis>
 
 
-//TODO add settings
-//TODO handle exceptions from logic library
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow),
-    generator(new SingleJumpGenerator(1,0)), timer(new QTimer()),
-    feedback(new FeedbackLoop(PidModel(2.0f, 2.0f, 2.0f), ModelARX( {0.4f, 0.0f, 0.0f}, {0.6f,0.0f,0.0f}, 0.0f, 0.1f))),
+    generator(new SingleJumpGenerator(0,0)), timer(new QTimer()),
+    feedback(new FeedbackLoop(PidModel(0.0f, 0.0f, 0.0f), ModelARX( {0.4f, 0.0f, 0.0f}, {0.6f,0.0f,0.0f}, 0.0f, 0.1f))),
     parameters(new Parameters(2,2,0)), seriesError(new QLineSeries()),seriesSetPoint(new QLineSeries()),
     seriesFeedback(new QLineSeries()), seriesPIDResult(new QLineSeries()), chart(new QChart())
 
@@ -63,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
     chart->createDefaultAxes();
 
     QValueAxis* axisX = new QValueAxis();
-    axisX->setRange(0, 250);
+    axisX->setRange(0, 1000);
     axisX->setTitleText("Czas (tick)");
     chart->setAxisX(axisX, seriesError);
     chart->setAxisX(axisX, seriesSetPoint);
@@ -71,7 +70,7 @@ MainWindow::MainWindow(QWidget *parent)
     chart->setAxisX(axisX, seriesPIDResult);
 
     QValueAxis* axisY = new QValueAxis();
-    axisY->setRange(-250, 250);
+    axisY->setRange(-1000, 1000);
     axisY->setTitleText("Wartość");
     chart->setAxisY(axisY, seriesError);
     chart->setAxisY(axisY, seriesSetPoint);
