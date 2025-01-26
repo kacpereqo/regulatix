@@ -471,6 +471,43 @@
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="resetButton">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>120</y>
+      <width>81</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Reset pamięci</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_9">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>200</y>
+      <width>591</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="chartLayout"/>
+   </widget>
+   <widget class="QPushButton" name="chartResetButton">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>0</y>
+      <width>81</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Reset wykresu</string>
+    </property>
+   </widget>
    <zorder>pidDiagram</zorder>
    <zorder>verticalLayoutWidget_2</zorder>
    <zorder>light</zorder>
@@ -481,6 +518,9 @@
    <zorder>errorLabel</zorder>
    <zorder>verticalLayoutWidget_5</zorder>
    <zorder>label_13</zorder>
+   <zorder>resetButton</zorder>
+   <zorder>horizontalLayoutWidget_9</zorder>
+   <zorder>chartResetButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

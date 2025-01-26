@@ -11,7 +11,7 @@ Generator::Generator(Parameters *parameters, QWidget *parent)
     connect(ui->buttonBox,&QDialogButtonBox::accepted,this, &Generator::ok);
 
     ui->textEdit0->setText(QString::number(parameters->zero));
-    ui->textEdit2->setText(QString::number(parameters->first));
+    ui->textEdit1->setText(QString::number(parameters->first));
     ui->textEdit2->setText(QString::number(parameters->second));
 
     switch(parameters->type)

@@ -28,10 +28,17 @@ private:
     void changeGenerator();
     void changeRegulatorParameters();
     void changeModelCoefficients();
+    void reset();
+    void chartReset();
     void tick();
 
     Ui::MainWindow *ui;
     QTimer *timer;
+    QChart *chart;
+    QLineSeries *seriesError; //uchyb
+    QLineSeries *seriesSetPoint; //wartosc zadana
+    QLineSeries *seriesFeedback;// sprzężenie zwrotne
+    QLineSeries *seriesPIDResult; //syg ster
 
     FeedbackLoop *feedback;
     f32 Last = 0.f; //sprzężenie zwrotne

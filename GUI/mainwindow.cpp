@@ -14,6 +14,7 @@
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QChart>
 #include <QtCharts/QChartView>
+#include <QtCharts/QValueAxis>
 
 //TODO add settings
 //TODO handle exceptions from logic library
@@ -22,7 +23,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow),
     generator(new SingleJumpGenerator(10,50)), timer(new QTimer()),
     feedback(new FeedbackLoop(PidModel(2.0f, 0.5f, 2.0f), ModelARX( {0.1f, 0.1f, 0.1f}, {0.1f,0.1f,0.1f}, 1.0f, 0.5f))),
-    parameters(new Parameters(10,50,0))
+    parameters(new Parameters(10,50,0)), seriesError(new QLineSeries()),seriesSetPoint(new QLineSeries()),
+    seriesFeedback(new QLineSeries()), seriesPIDResult(new QLineSeries()), chart(new QChart())
 
 
 {
@@ -45,14 +47,56 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->textEditDelay->setText(QString::number(feedback->get_delay()));
 
+    //charts
+
+    seriesError->setName("Uchyb regulacji");
+    seriesSetPoint->setName("Wartość zadana");
+    seriesFeedback->setName("Wartość regulowana");
+    seriesPIDResult->setName("Sygnał sterujący");
+
+    chart->addSeries(seriesError);
+    chart->addSeries(seriesSetPoint);
+    chart->addSeries(seriesFeedback);
+    chart->addSeries(seriesPIDResult);
+
+    chart->createDefaultAxes();
+
+    QValueAxis* axisX = new QValueAxis();
+    axisX->setRange(0, 1000);
+    axisX->setTitleText("Czas (tick)");
+    chart->setAxisX(axisX, seriesError);
+    chart->setAxisX(axisX, seriesSetPoint);
+    chart->setAxisX(axisX, seriesFeedback);
+    chart->setAxisX(axisX, seriesPIDResult);
+
+    QValueAxis* axisY = new QValueAxis();
+    axisY->setRange(-2000, 2000);
+    axisY->setTitleText("Wartość");
+    chart->setAxisY(axisY, seriesError);
+    chart->setAxisY(axisY, seriesSetPoint);
+    chart->setAxisY(axisY, seriesFeedback);
+    chart->setAxisY(axisY, seriesPIDResult);
+
+    QFont font;
+    font.setPixelSize(18);
+    chart->setTitleFont(font);
+    chart->setTitle("Wykres");
+
+    chart->setTitleBrush(QBrush(Qt::black));
+    chart->setFont(font);
+    QChartView* chartView = new QChartView(chart);
+    ui->chartLayout->addWidget(chartView);
+
+
+
 
     connect(ui->startStopButton, &QPushButton::clicked, this, &MainWindow::startStopSimulation);
     connect(timer,&QTimer::timeout,this,&MainWindow::tick);
     connect(ui->generatorComboBox,&QComboBox::currentIndexChanged,this, &MainWindow::changeGenerator);
     connect(ui->setRegulatorButton, &QPushButton::clicked, this, &MainWindow::changeRegulatorParameters);
     connect(ui->setCoefficientsButton, &QPushButton::clicked, this, &MainWindow::changeModelCoefficients);
-
-
+    connect(ui->resetButton,&QPushButton::clicked,this,&MainWindow::reset);
+    connect(ui->chartResetButton,&QPushButton::clicked,this,&MainWindow::chartReset);
 }
 
 MainWindow::~MainWindow()
@@ -119,6 +163,18 @@ void MainWindow::changeModelCoefficients()
     feedback->set_delay(delay);
 
 }
+void MainWindow::reset()
+{
+    feedback->reset();
+}
+void MainWindow::chartReset()
+{
+    seriesError->clear();
+    seriesSetPoint->clear();
+    seriesFeedback->clear();
+    seriesPIDResult->clear();
+    tickIndex = 0;
+}
 
 void MainWindow::tick()
 {
@@ -132,6 +188,11 @@ void MainWindow::tick()
 
     ui->errorLabel->setText(QString::number(feedback->get_error()));
     ui->pidResultLabel->setText(QString::number(feedback->get_pid_result()));
+
+    seriesError->append(tickIndex,feedback->get_error());
+    seriesSetPoint->append(tickIndex,setpoint);
+    seriesFeedback->append(tickIndex,Last);
+    seriesPIDResult->append(tickIndex,feedback->get_pid_result());
 }
 void MainWindow::changeRegulatorParameters()
 {

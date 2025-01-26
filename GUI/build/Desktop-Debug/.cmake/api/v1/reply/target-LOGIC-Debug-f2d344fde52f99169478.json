@@ -75,11 +75,11 @@
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 0,
-			"id" : "LOGIC_autogen::@9dc992399c60d0058af0"
+			"id" : "LOGIC_autogen_timestamp_deps::@9dc992399c60d0058af0"
 		},
 		{
-			"id" : "LOGIC_autogen_timestamp_deps::@9dc992399c60d0058af0"
+			"backtrace" : 0,
+			"id" : "LOGIC_autogen::@9dc992399c60d0058af0"
 		}
 	],
 	"id" : "LOGIC::@9dc992399c60d0058af0",
