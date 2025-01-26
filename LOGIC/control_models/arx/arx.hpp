@@ -36,6 +36,10 @@ public:
     void set_a(const std::vector<f32>& a);
     void set_b(const std::vector<f32>& b);
 
+    std::vector<f32> get_a() const;
+    std::vector<f32> get_b() const;
+    float get_delay() const;
+
 };
 
 

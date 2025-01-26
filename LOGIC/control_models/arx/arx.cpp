@@ -70,4 +70,17 @@ void ModelARX::set_b(const std::vector<f32>& b) {
 void ModelARX::set_noise_coefficient(const f32 noise_coefficient) {
     this->noise_coefficient = noise_coefficient;
 }
+std::vector<f32> ModelARX::get_a() const
+{
+    return a;
+}
+std::vector<f32> ModelARX::get_b() const
+{
+    return b;
+}
+float ModelARX::get_delay() const
+{
+    return delay;
+}
+
 

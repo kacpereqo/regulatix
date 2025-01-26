@@ -17,20 +17,11 @@
 
 //TODO add settings
 //TODO handle exceptions from logic library
-constexpr f32 SINGLE_JUMP_AMPLITUDE = 10;
-constexpr u32 SINGLE_JUMP_ACIVATION_TICK = 50;
-
-constexpr f32 RECTANGLE_AMPLITUDE = 15;
-constexpr u32 RECTANGLE_PERIOD = 20;
-constexpr f32 RECTANGLE_FILL = 0.5;
-
-constexpr f32 SINUS_AMPLITUDE = 5;
-constexpr u32 SINUS_PERIOD = 15;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow),
     generator(new SingleJumpGenerator(10,50)), timer(new QTimer()),
-    feedback(new FeedbackLoop(PidModel(2.0f, 0.5f, 2.0f), ModelARX( {0.1f}, {0.1f}, 1.0f, 0.5f))),
+    feedback(new FeedbackLoop(PidModel(2.0f, 0.5f, 2.0f), ModelARX( {0.1f, 0.1f, 0.1f}, {0.1f,0.1f,0.1f}, 1.0f, 0.5f))),
     parameters(new Parameters(10,50,0))
 
 
@@ -41,11 +32,26 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tTextEdit->setText(QString::number(feedback->get_t()));
     ui->tdTextEdit->setText(QString::number(feedback->get_td()));
 
+    std::vector <f32> a = feedback->get_a();
+    std::vector <f32> b = feedback->get_b();
+
+    ui->textEditA0->setText(QString::number(a[0]));
+    ui->textEditA1->setText(QString::number(a[1]));
+    ui->textEditA2->setText(QString::number(a[2]));
+
+    ui->textEditB0->setText(QString::number(b[0]));
+    ui->textEditB1->setText(QString::number(b[1]));
+    ui->textEditB2->setText(QString::number(b[2]));
+
+    ui->textEditDelay->setText(QString::number(feedback->get_delay()));
+
 
     connect(ui->startStopButton, &QPushButton::clicked, this, &MainWindow::startStopSimulation);
     connect(timer,&QTimer::timeout,this,&MainWindow::tick);
     connect(ui->generatorComboBox,&QComboBox::currentIndexChanged,this, &MainWindow::changeGenerator);
     connect(ui->setRegulatorButton, &QPushButton::clicked, this, &MainWindow::changeRegulatorParameters);
+    connect(ui->setCoefficientsButton, &QPushButton::clicked, this, &MainWindow::changeModelCoefficients);
+
 
 }
 
@@ -96,8 +102,27 @@ void MainWindow::changeGenerator()
     }
 
 }
+void MainWindow::changeModelCoefficients()
+{
+    float a0 = ui->textEditA0->toPlainText().toFloat();
+    float a1 = ui->textEditA1->toPlainText().toFloat();
+    float a2 = ui->textEditA2->toPlainText().toFloat();
+
+    float b0 = ui->textEditB0->toPlainText().toFloat();
+    float b1 = ui->textEditB1->toPlainText().toFloat();
+    float b2 = ui->textEditB2->toPlainText().toFloat();
+
+    float delay = ui->textEditDelay->toPlainText().toFloat();
+
+    feedback->set_a({a0, a1, a2});
+    feedback->set_a({b0, b1, b2});
+    feedback->set_delay(delay);
+
+}
+
 void MainWindow::tick()
 {
+
     f32 setpoint = generator->generate(tickIndex);
     ui->setpointLabel->setText(QString::number(setpoint));
     tickIndex++;
@@ -110,14 +135,12 @@ void MainWindow::tick()
 }
 void MainWindow::changeRegulatorParameters()
 {
-    bool error;
-    int k =ui->kTextEdit->toPlainText().toFloat();
-    int t = ui->tTextEdit->toPlainText().toFloat();
-    int td = ui->tdTextEdit->toPlainText().toFloat();
 
-    bool kValid = ui->kTextEdit->toPlainText().toFloat(&error);
-    bool tValid = ui->tTextEdit->toPlainText().toFloat(&error);
-    bool tdValid = ui->tdTextEdit->toPlainText().toFloat(&error);
+    bool kValid, tValid, tdValid;
+
+    float k = ui->kTextEdit->toPlainText().toFloat(&kValid);
+    float t = ui->tTextEdit->toPlainText().toFloat(&tValid);
+    float td = ui->tdTextEdit->toPlainText().toFloat(&tdValid);
 
 
     if (!kValid || !tValid || !tdValid)
@@ -127,9 +150,9 @@ void MainWindow::changeRegulatorParameters()
     }
     else
     {
-        feedback->set_k(ui->kTextEdit->toPlainText().toFloat());
-        feedback->set_t(ui->tTextEdit->toPlainText().toFloat());
-        feedback->set_td(ui->tdTextEdit->toPlainText().toFloat());
+        feedback->set_k(k);
+        feedback->set_t(t);
+        feedback->set_td(td);
     }
 
 }

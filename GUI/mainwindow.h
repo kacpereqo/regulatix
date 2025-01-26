@@ -27,6 +27,7 @@ private:
     void startStopSimulation();
     void changeGenerator();
     void changeRegulatorParameters();
+    void changeModelCoefficients();
     void tick();
 
     Ui::MainWindow *ui;
