@@ -46,8 +46,6 @@ void Generator::ok()
     bool zeroValid = ui->textEdit0->toPlainText().toFloat(&error);
     bool firstValid = ui->textEdit1->toPlainText().toUInt(&error);
     bool secondValid = ui->textEdit2->toPlainText().toFloat(&error);
-    else if(s == 0)
-    {
 
 
     if (!zeroValid || !firstValid || !secondValid)
