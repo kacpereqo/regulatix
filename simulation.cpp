@@ -22,6 +22,10 @@ float Simulation::get_ticks_per_second() const{
     return this->ticks_per_second;
 }
 
+void Simulation::increment_tick(){
+    this->tick++;
+}
+
 size_t Simulation::get_tick(){
     return this->tick;
 }
@@ -47,6 +51,21 @@ void Simulation::simulate(){
     pid_output = this->pid->run(error);
 
     arx_output = this->arx->run(pid_output);
+
+
+    SimulationFrame frame{
+        .tick = tick,
+        .geneartor_output = generator,
+        .p = this->pid->proportional_part,
+        .i = this->pid->integral_part,
+        .d = this->pid->derivative_part,
+        .pid_output = pid_output,
+        .error = error,
+        .arx_output = arx_output,
+        .noise = this->arx->noise_part,
+    };
+
+    this->frames.push_back(frame);
 
     emit this->add_series("I", this->pid->integral_part, ChartPosition::top);
     emit this->add_series("D", this->pid->derivative_part, ChartPosition::top);
@@ -89,6 +108,7 @@ void Simulation::reset(){
 
     this->pid->reset();
     this->arx->reset();
+    this->frames.clear();
 
 }
 

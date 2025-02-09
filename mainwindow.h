@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "simulation.h"
 #include <QAction>
+#include "exportdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -27,7 +28,6 @@ private slots:
 
     void on_simulation_start_button_clicked();
     void on_simulation_stop_button_clicked();
-    void on_simulation_ticks_per_second_input_valueChanged(int arg1);
     void on_simulation_duration_input_valueChanged(double arg1);
 
     // pid
@@ -54,8 +54,10 @@ private slots:
 
     void on_simulation_interval_input_valueChanged(int arg1);
 
-    void on_action_save_as();
-    void on_action_open();
+    void action_save_as();
+    void action_open();
+    void action_simulation_export();
+    void action_simulation_open();
 
 private:
     void init();

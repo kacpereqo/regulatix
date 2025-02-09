@@ -20,6 +20,21 @@ struct Point{
     float y;
 };
 
+struct SimulationFrame{
+    size_t tick;
+    float geneartor_output;
+
+    float p;
+    float i;
+    float d;
+    float pid_output;
+
+    float error;
+
+    float arx_output;
+    float noise;
+
+};
 
 class Simulation : public QObject
 {
@@ -36,6 +51,8 @@ public:
     size_t get_tick();
     float get_ticks_per_second() const;
 
+    void increment_tick();
+
     float durration{0};
 
     bool is_running{false};
@@ -50,6 +67,8 @@ public:
     std::unique_ptr<PID> pid;
     std::unique_ptr<Generator> generator;
     std::unique_ptr<ARX> arx;
+
+    std::list<SimulationFrame> frames{};
 
     std::vector<std::byte> serialize();
     void deserialize(std::vector<std::byte> data);

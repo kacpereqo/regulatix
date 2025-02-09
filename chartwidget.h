@@ -33,6 +33,9 @@ public slots:
     void reset();
     void update_chart();
 
+    std::vector<QLineSeries*> get_series_list() const { return this->series_list; }
+    ChartPosition get_position() const { return this->position; }
+
 private:
 
     void append_to_series(float x, float y);

@@ -462,7 +462,15 @@
     <addaction name="action_save_as"/>
     <addaction name="action_open"/>
    </widget>
+   <widget class="QMenu" name="menuSimulation">
+    <property name="title">
+     <string>Simulation</string>
+    </property>
+    <addaction name="action_export"/>
+    <addaction name="action_simulation_open"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuSimulation"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -488,6 +496,16 @@
    </property>
   </action>
   <action name="action_open">
+   <property name="text">
+    <string>Open...</string>
+   </property>
+  </action>
+  <action name="action_export">
+   <property name="text">
+    <string>Export...</string>
+   </property>
+  </action>
+  <action name="action_simulation_open">
    <property name="text">
     <string>Open...</string>
    </property>

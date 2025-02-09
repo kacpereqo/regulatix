@@ -25,14 +25,13 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(regulatixPRO
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        chart.h chart.cpp chart.ui
+
         simulation.h simulation.cpp
         arx.h arx.cpp
         pid.h pid.cpp
         generator.h generator.cpp
         chartwidget.h chartwidget.cpp chartwidget.ui
-        chart.h chart.cpp
-        chart.ui
+        exportdialog.h exportdialog.cpp exportdialog.ui
 
 
     )

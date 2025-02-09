@@ -16,8 +16,131 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&this->simulation, &Simulation::simulation_start, this, &MainWindow::simulation_start);
     connect(&this->simulation, &Simulation::simulation_stop, this, &MainWindow::simulation_stop);
 
-    connect(this->ui->action_save_as, &QAction::triggered, this, &MainWindow::on_action_save_as);
-    connect(this->ui->action_open, &QAction::triggered, this, &MainWindow::on_action_open);
+    connect(this->ui->action_save_as, &QAction::triggered, this, &MainWindow::action_save_as);
+    connect(this->ui->action_open, &QAction::triggered, this, &MainWindow::action_open);
+    connect(this->ui->action_export, &QAction::triggered, this, &MainWindow::action_simulation_export);
+    connect(this->ui->action_simulation_open, &QAction::triggered, this, &MainWindow::action_simulation_open);
+
+}
+
+void MainWindow::action_simulation_open(){
+    qDebug() << "open";
+
+    QString file_name = QFileDialog::getOpenFileName(this, "Open simulated csv", "", "Simulated data (*.csv)");
+
+    QFile file(file_name);
+
+    QString header;
+
+    if (file.open(QIODevice::ReadOnly)){
+        header = file.readLine();
+
+        QStringList header_parts = header.split(",");
+        if (header_parts.size() != 9){
+            for (auto& part : header_parts){
+                qDebug() << part;
+            }
+            qDebug() << header_parts.size();
+            qDebug() << "invalid header";
+            return;
+        }
+
+        this->simulation.reset();
+
+        while (!file.atEnd()){
+            QString line = file.readLine();
+
+            QStringList parts = line.split(",");
+
+            // parse to frame
+            SimulationFrame frame;
+
+            frame.tick = parts[0].toInt();
+            frame.i = parts[1].toFloat();
+            frame.p = parts[2].toFloat();
+            frame.d = parts[3].toFloat();
+            frame.pid_output = parts[4].toFloat();
+            frame.geneartor_output = parts[5].toFloat();
+            frame.error = parts[6].toFloat();
+            frame.arx_output = parts[7].toFloat();
+            frame.noise = parts[8].toFloat();
+
+            emit this->simulation.add_series("I", frame.i, ChartPosition::top);
+            emit this->simulation.add_series("P", frame.p, ChartPosition::top);
+            emit this->simulation.add_series("D", frame.d, ChartPosition::top);
+            emit this->simulation.add_series("PID Output", frame.pid_output, ChartPosition::top);
+
+            emit this->simulation.add_series("Generator Output", frame.geneartor_output, ChartPosition::middle);
+            emit this->simulation.add_series("Error", frame.error, ChartPosition::middle);
+
+            emit this->simulation.add_series("ARX Output", frame.arx_output, ChartPosition::bottom);
+            emit this->simulation.add_series("Noise", frame.noise, ChartPosition::middle);
+
+            this->simulation.increment_tick();
+            this->simulation.frames.push_back(frame);
+        }
+
+        file.close();
+    }
+}
+
+void MainWindow::action_simulation_export(){
+    this->simulation.stop();
+
+    ExportDialog dialog;
+    bool result = dialog.exec();
+
+    if (!result) return;
+
+    ExportChecked checked = dialog.get_checked();
+
+    QString file_name = QFileDialog::getSaveFileName(this, "Export simulation", "", "CSV files (*.csv)");
+
+    QFile file(file_name);
+
+    const QString SEPARATOR = ",";
+
+    QString header = "Time" + SEPARATOR;
+
+    qDebug() << (checked.error) ;
+
+    if (checked.pid_i) header += "PID I" + SEPARATOR;
+    if (checked.pid_p) header += "PID P" + SEPARATOR;
+    if (checked.pid_d) header += "PID D" + SEPARATOR;
+    if (checked.pid_output) header += "PID Output" + SEPARATOR;
+    if (checked.error) header += "Error" + SEPARATOR;
+
+    if (checked.generator_output) header += "Generator Output" + SEPARATOR;;
+    if (checked.arx_output) header += "ARX Output" + SEPARATOR;
+    if (checked.arx_noise) header += "ARX Noise" + SEPARATOR;
+
+    header.chop(1);
+
+    if (file.open(QIODevice::WriteOnly)){
+        file.write(header.toUtf8());
+        file.write("\n");
+
+        for (auto& frame : this->simulation.frames){
+
+            QString result = QString::number(frame.tick) + SEPARATOR;
+            if (checked.pid_i) result += QString::number(frame.i) + SEPARATOR;
+            if (checked.pid_p) result += QString::number(frame.p) + SEPARATOR;
+            if (checked.pid_d) result += QString::number(frame.d) + SEPARATOR;
+            if (checked.pid_output) result += QString::number(frame.pid_output) + SEPARATOR;
+            if (checked.generator_output) result += QString::number(frame.geneartor_output) + SEPARATOR;
+            if (checked.error) result += QString::number(frame.error) + SEPARATOR;
+            if (checked.arx_output) result += QString::number(frame.arx_output) + SEPARATOR;
+            if (checked.arx_noise) result += QString::number(frame.noise) + SEPARATOR;
+
+            result.chop(1);
+            result += "\n";
+
+
+            file.write(result.toUtf8());
+        }
+
+        file.close();
+    }
 
 }
 
@@ -27,7 +150,7 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_action_save_as(){
+void MainWindow::action_save_as(){
     qDebug() << "save as";
 
     std::vector<std::byte> data{this->simulation.serialize()};
@@ -44,7 +167,7 @@ void MainWindow::on_action_save_as(){
     qDebug() << "saved";
 }
 
-void MainWindow::on_action_open(){
+void MainWindow::action_open(){
     qDebug() << "open";
 
     QString file_name = QFileDialog::getOpenFileName(this, "Open simulation", "", "Simulation files (*.dat)");
@@ -61,7 +184,6 @@ void MainWindow::on_action_open(){
     this->init();
 
     qDebug() << "opened";
-
 }
 
 void MainWindow::init(){
@@ -142,15 +264,6 @@ void MainWindow::on_simulation_stop_button_clicked()
 {
     this->simulation.stop();
 }
-
-void MainWindow::on_simulation_ticks_per_second_input_valueChanged(int arg1)
-{
-    if (this->simulation.is_running)
-        this->simulation.stop();
-
-    this->simulation.set_ticks_per_second(arg1);
-}
-
 
 void MainWindow::on_simulation_duration_input_valueChanged(double arg1)
 {
