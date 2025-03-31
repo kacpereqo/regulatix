@@ -1,7 +1,7 @@
 #ifndef GENERATOR_H
 #define GENERATOR_H
 
-enum class GeneratorType{
+enum class GeneratorType {
     sine,
     square,
     triangle,
@@ -28,7 +28,7 @@ private:
     GeneratorType type{GeneratorType::sine};
 
     float frequency{1};
-    float amplitude{1};
+    float amplitude{10};
 };
 
 #endif // GENERATOR_H

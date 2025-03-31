@@ -1,0 +1,12 @@
+release/main.o
+release/mainwindow.o
+release/simulation.o
+release/arx.o
+release/pid.o
+release/generator.o
+release/chartwidget.o
+release/exportdialog.o
+release/moc_mainwindow.o
+release/moc_simulation.o
+release/moc_chartwidget.o
+release/moc_exportdialog.o
