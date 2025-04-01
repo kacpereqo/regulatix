@@ -1,7 +1,7 @@
 #include "testy.h"
 #include "qarx.h"
 #include "qpid.h"
-#include "quar.h"
+#include "uar.h"
 
 // testy ARX
 

@@ -8,7 +8,7 @@
 #include <QString>
 #include <QTimer>
 
-#include "quar.h"
+#include "uar.h"
 #include "qwarzad.h"
 #include "testy.h"
 #include "ui_mainwindow.h"

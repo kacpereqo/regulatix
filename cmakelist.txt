@@ -1,0 +1,52 @@
+cmake_minimum_required(VERSION 3.16)
+project(MyQtProject)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets PrintSupport)
+
+add_executable(${PROJECT_NAME}
+    main.cpp
+    mainwindow.cpp
+    qarx.cpp
+    qarx_insert_dialog.cpp
+    qcustomplot.cpp
+    qpid.cpp
+    qwarzad.cpp
+    testy.cpp
+    uar.cpp
+)
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Widgets
+    Qt6::PrintSupport
+)
+
+set(UI_FILES
+    mainwindow.ui
+    qarx_insert_dialog.ui
+)
+
+qt6_wrap_ui(UI_HEADERS ${UI_FILES})
+
+set(HEADER_FILES
+    mainwindow.h
+    qarx.h
+    qarx_insert_dialog.h
+    qcustomplot.h
+    qpid.h
+    qwarzad.h
+    testy.h
+    uar.h
+)
+
+qt6_add_resources(RESOURCES ${DISTFILES})
+
+install(TARGETS ${PROJECT_NAME} DESTINATION /opt/${PROJECT_NAME}/bin)

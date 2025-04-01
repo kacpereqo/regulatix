@@ -7,15 +7,29 @@ class QPID : public QObject
 {
     Q_OBJECT
 private:
-    double kp = 0.0, ki = 0.0, kd = 0.0;
-    double P = 0.0, I = 0.0, D = 0.0;
-    double uchyb = 0.0, poprzUch = 0.0;
-    double ileUch = 0.0, ileUch_podC = 0.0;
-    double min = 0.0, max = 0.0;
-    bool limity = false, anty_windup = false, suma_pod_calka = false;
+    double kp = 0.0;
+    double ki = 0.0;
+    double kd = 0.0;
+
+    double P = 0.0;
+    double I = 0.0;
+    double D = 0.0;
+
+    double uchyb = 0.0;
+    double poprzUch = 0.0;
+    double ileUch = 0.0;
+    double ileUch_podC = 0.0;
+
+    double min = 0.0;
+    double max = 0.0;
+
+    bool limity = false;
+    bool anty_windup = false;
+    bool suma_pod_calka = false;
 
 public:
     explicit QPID(QObject *parent = nullptr);
+
     QPID(double P_m = 0, double I_m = 0, double D_m = 0)
     {
         kp = P_m;

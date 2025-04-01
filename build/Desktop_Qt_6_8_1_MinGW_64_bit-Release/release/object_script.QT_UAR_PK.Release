@@ -1,0 +1,16 @@
+release/main.o
+release/mainwindow.o
+release/qarx.o
+release/qarx_insert_dialog.o
+release/qcustomplot.o
+release/qpid.o
+release/qwarzad.o
+release/testy.o
+release/uar.o
+release/moc_mainwindow.o
+release/moc_qarx.o
+release/moc_qarx_insert_dialog.o
+release/moc_qcustomplot.o
+release/moc_qpid.o
+release/moc_qwarzad.o
+release/moc_uar.o

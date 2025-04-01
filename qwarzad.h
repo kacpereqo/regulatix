@@ -10,9 +10,13 @@ class QwarZadana : public QObject
     Q_OBJECT
 
 private:
-    double Aj = 0, As = 0, Ap = 0;
-    size_t Ts = 0, Tp = 0;
+    double Aj = 0;
+    double As = 0;
+    double Ap = 0;
     double Pp = 0;
+
+    size_t Ts = 0;
+    size_t Tp = 0;
 
 public:
     explicit QwarZadana(QObject *parent = nullptr);

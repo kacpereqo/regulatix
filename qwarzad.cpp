@@ -5,38 +5,45 @@ QwarZadana::QwarZadana(QObject *parent)
     : QObject{parent}
 {}
 
-void QwarZadana::set_J(double A)
+void QwarZadana::set_J(double Aj)
 {
-    Aj = A;
+    this->Aj = Aj;
 }
 
-void QwarZadana::set_S(double A, size_t T)
+void QwarZadana::set_S(double As, size_t Ts)
 {
-    As = A;
-    Ts = T;
+    this->As = As;
+    this->Ts = Ts;
 }
 
-void QwarZadana::set_P(double A, size_t T, double P)
+void QwarZadana::set_P(double Ap, size_t Tp, double Pp)
 {
-    Ap = A;
-    Tp = T;
-    Pp = P;
+    this->Ap = Ap;
+    this->Tp = Tp;
+    this->Pp = Pp;
 }
 
 double QwarZadana::simulate_value(size_t i)
 {
     double value = Aj;
-    value += ((0 < Ts) ? (As * qSin((i % Ts) * 2.0 * M_PI / Ts)) : 0);
-    if (0 < Tp && 0 < Pp)
-        value += (((i % Tp < Pp * Tp)) ? Ap : 0);
+
+    if (0 < Ts)
+        value += As * qSin((i % Ts) * 2.0 * M_PI / Ts);
+
+    else if (0 < Tp && 0 < Pp && (i % Tp < Pp * Tp))
+        value += Ap;
+
     return value;
 }
 
 void QwarZadana::reset()
 {
-    Aj = 0, As = 0, Ap = 0;
-    Ts = 0, Tp = 0;
-    Pp = 0;
+    this->Aj = 0;
+    this->As = 0;
+    this->Ap = 0;
+    this->Ts = 0;
+    this->Tp = 0;
+    this->Pp = 0;
 }
 
 QByteArray QwarZadana::serialize()

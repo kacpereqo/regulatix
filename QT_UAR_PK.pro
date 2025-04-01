@@ -15,9 +15,9 @@ SOURCES += \
     qarx_insert_dialog.cpp \
     qcustomplot.cpp \
     qpid.cpp \
-    quar.cpp \
     qwarzad.cpp \
-    testy.cpp
+    testy.cpp \
+    uar.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -25,9 +25,9 @@ HEADERS += \
     qarx_insert_dialog.h \
     qcustomplot.h \
     qpid.h \
-    quar.h \
     qwarzad.h \
-    testy.h
+    testy.h \
+    uar.h
 
 FORMS += \
     mainwindow.ui \

@@ -10,21 +10,6 @@ class TEST
 protected:
     static constexpr size_t LICZ_ITER = 30;
 
-    /*
-    void raportBleduSekwencji(std::vector<double>& spodz, std::vector<double>& fakt)
-    {
-        constexpr size_t PREC = 3;
-        std::cerr << std::fixed << std::setprecision(PREC);
-        std::cerr << "  Spodziewany:\t";
-        for (auto& el : spodz)
-            std::cerr << el << ", ";
-        std::cerr << "\n  Faktyczny:\t";
-        for (auto& el : fakt)
-            std::cerr << el << ", ";
-        std::cerr << std::endl << std::endl;
-    }
-    */
-
     static bool porownanieSekwencji(QVector<double> &spodz, QVector<double> &fakt)
     {
         constexpr double TOL = 1e-3;
